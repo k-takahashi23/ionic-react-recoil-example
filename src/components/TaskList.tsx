@@ -2,12 +2,12 @@ import React from 'react';
 import { useRecoilState } from "recoil";
 import { tasksState } from '../recoil/atoms/tasksState';
 import { Task } from '../interfaces/task';
-import { IonCheckbox, IonItem, IonLabel } from '@ionic/react';
+import { IonButton, IonCheckbox, IonItem, IonLabel } from '@ionic/react';
 
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useRecoilState(tasksState);
 
-  const isCompleted = (task: Task) => {
+  const onToggleCheck = (task: Task) => {
     const copytasks = [...tasks];
     const copytask = { ...task };
     copytask.completed = !copytask.completed;
@@ -27,22 +27,23 @@ const TaskList: React.FC = () => {
     <div>
       <ul>
           {tasks.map(task => (
-            // <li key={task.id}>
-            <>
-              <IonItem>
-                <IonLabel
-                  style={{ textDecoration: task.completed ? "line-through" : "" }}
-                >
-                  {task.title}
-                </IonLabel>
-                <IonCheckbox
-                  slot="start"
-                  onIonChange={e => isCompleted(task)}
-                />
-              </IonItem>
-              <button onClick={() => onRemove(task.id)}>削除</button>
-              </>
-            // </li>
+            <IonItem key={task.id}>
+              <IonLabel
+                style={{ textDecoration: task.completed ? "line-through" : "" }}
+              >
+                {task.title}
+              </IonLabel>
+              <IonCheckbox
+                slot="start"
+                onIonChange={() => onToggleCheck(task)}
+              />
+              <IonButton
+                color="danger"
+                onClick={() => onRemove(task.id)}
+              >
+                DELETE
+              </IonButton>
+            </IonItem>
           ))}
       </ul>
     </div>
