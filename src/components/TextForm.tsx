@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { tasksState } from '../recoil/atoms/tasksState';
 
-const TextForm: React.FC = () => {
+export const TextForm: React.FC = () => {
   const [inputTitle, setInputTitle] = useState<string>("");
   const [currentId, setCurrentId] = useState<number>(0);
   const setTasks = useSetRecoilState(tasksState);
@@ -19,7 +19,7 @@ const TextForm: React.FC = () => {
       <IonItem>
         <IonInput
           value={inputTitle}
-          placeholder="Enter Input"
+          placeholder="Enter Task Title"
           onIonChange={e => setInputTitle(e.detail.value!)}
         />
         <IonButton
@@ -31,5 +31,3 @@ const TextForm: React.FC = () => {
     </div>
   )
 }
-
-export default TextForm;

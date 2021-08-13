@@ -1,6 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import TaskList from '../components/TaskList';
-import TextForm from '../components/TextForm';
+import { TaskList } from '../components/TaskList';
+import { TextForm } from '../components/TextForm';
 
 const Home: React.FC = () => {
   return (

@@ -2,9 +2,9 @@ import React from 'react';
 import { useRecoilState } from "recoil";
 import { tasksState } from '../recoil/atoms/tasksState';
 import { Task } from '../interfaces/task';
-import { IonButton, IonCheckbox, IonItem, IonLabel } from '@ionic/react';
+import { TaskItem } from './TaskItem';
 
-const TaskList: React.FC = () => {
+export const TaskList: React.FC = () => {
   const [tasks, setTasks] = useRecoilState(tasksState);
 
   const onToggleCheck = (task: Task) => {
@@ -16,38 +16,22 @@ const TaskList: React.FC = () => {
     setTasks(copytasks);
   }
 
-  const onRemove = (id: number) => {
+  const onRemove = (task: Task) => {
     const copytasks = [...tasks];
-    const index=copytasks.findIndex(int=>int.id===id);
+    const index = copytasks.findIndex(int => int.id === task.id);
     copytasks.splice(index, 1);
     setTasks(copytasks);
   }
 
   return (
-    <div>
-      <ul>
-          {tasks.map(task => (
-            <IonItem key={task.id}>
-              <IonLabel
-                style={{ textDecoration: task.completed ? "line-through" : "" }}
-              >
-                {task.title}
-              </IonLabel>
-              <IonCheckbox
-                slot="start"
-                onIonChange={() => onToggleCheck(task)}
-              />
-              <IonButton
-                color="danger"
-                onClick={() => onRemove(task.id)}
-              >
-                DELETE
-              </IonButton>
-            </IonItem>
-          ))}
-      </ul>
-    </div>
+    <>
+      {tasks.map(task => (
+        <TaskItem
+          task={task}
+          onToggleCheck={onToggleCheck}
+          onRemove={onRemove}
+        />
+      ))}
+    </>
   )
 }
-
-export default TaskList;
