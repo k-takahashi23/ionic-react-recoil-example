@@ -27,6 +27,7 @@ export const TaskList: React.FC = () => {
     <>
       {tasks.map(task => (
         <TaskItem
+          key={task.id}
           task={task}
           onToggleCheck={onToggleCheck}
           onRemove={onRemove}
