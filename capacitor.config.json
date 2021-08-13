@@ -1,6 +1,6 @@
 {
 	"appId": "io.ionic.starter",
-	"appName": "ionic-react-example",
+	"appName": "ionic-react-recoil-example",
 	"webDir": "build",
 	"bundledWebRuntime": false
 }
