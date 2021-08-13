@@ -5,13 +5,13 @@ import { IonButton, IonCheckbox, IonItem, IonLabel } from '@ionic/react';
 interface TaskItemProps {
   task: Task
   onToggleCheck: (task: Task) => void
-  onRemove: (task: Task) => void
+  onDelete: (task: Task) => void
 }
 
 export const TaskItem: React.FC<TaskItemProps> = ({
   task,
   onToggleCheck,
-  onRemove,
+  onDelete,
 }) => {
 
   return (
@@ -27,7 +27,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({
       />
       <IonButton
         color="danger"
-        onClick={() => onRemove(task)}
+        onClick={() => onDelete(task)}
       >
         DELETE
       </IonButton>

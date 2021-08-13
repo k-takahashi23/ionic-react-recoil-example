@@ -9,9 +9,19 @@ export const TextForm: React.FC = () => {
   const setTasks = useSetRecoilState(tasksState);
 
   const onAdd = () => {
-    setCurrentId(currentId+1);
-    setTasks(t => [...t, { id: currentId, title: inputTitle, completed: false }]);
-    setInputTitle("");
+    if (inputTitle !== "") {
+      // Auto Increment ID
+      setCurrentId(currentId + 1);
+      // Add new Task
+      const newTask = {
+        id: currentId,
+        title: inputTitle,
+        completed: false
+      };
+      setTasks(t => [...t, newTask]);
+      // Reset Title
+      setInputTitle("");
+    }
   }
 
   return (
@@ -23,6 +33,7 @@ export const TextForm: React.FC = () => {
           onIonChange={e => setInputTitle(e.detail.value!)}
         />
         <IonButton
+          disabled={inputTitle === ""}
           onClick={onAdd}
         >
           ADD
