@@ -8,21 +8,20 @@ const TextForm: React.FC = () => {
   const setTasks = useSetRecoilState(tasksState);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setTitle(e.target.value)
+    setTitle(e.target.value)
   }
 
   const onAdd = () => {
-      setNumber(number+1);
-      setTasks(t => [...t, { id: number, title, completed: false }])　//titleはtitle:tilteと同じになるので省略できる
-      setTitle("")
+    setNumber(number+1);
+    setTasks(t => [...t, { id: number, title, completed: false }])
+    setTitle("")
   }
 
   return (
-
-      <div>
-          <input type="text" value={title} onChange={onChange}></input>
-          <button onClick={onAdd}>登録</button>
-      </div>
+    <div>
+      <input type="text" value={title} onChange={onChange}></input>
+      <button onClick={onAdd}>登録</button>
+    </div>
   )
 }
 

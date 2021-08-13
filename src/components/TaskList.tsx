@@ -2,6 +2,7 @@ import React from 'react';
 import { useRecoilState } from "recoil";
 import { tasksState } from '../recoil/atoms/tasksState';
 import { Task } from '../interfaces/task';
+import { IonCheckbox, IonItem, IonLabel } from '@ionic/react';
 
 const TaskList: React.FC = () => {
   const [tasks, setTasks] = useRecoilState(tasksState);
@@ -26,13 +27,22 @@ const TaskList: React.FC = () => {
     <div>
       <ul>
           {tasks.map(task => (
-            <li key={task.id}>
-              <input type="checkbox" checked={task.completed} onChange={() => isCompleted(task)}></input>
-              <span style={{ textDecoration: task.completed ? "line-through" : "" }}>
-                {task.title}
-              </span>
+            // <li key={task.id}>
+            <>
+              <IonItem>
+                <IonLabel
+                  style={{ textDecoration: task.completed ? "line-through" : "" }}
+                >
+                  {task.title}
+                </IonLabel>
+                <IonCheckbox
+                  slot="start"
+                  onIonChange={e => isCompleted(task)}
+                />
+              </IonItem>
               <button onClick={() => onRemove(task.id)}>削除</button>
-            </li>
+              </>
+            // </li>
           ))}
       </ul>
     </div>
